@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-SHELLHUB_PATH = /usr/bin/shellhub_agent
+SHELLHUB_PATH=/usr/bin/shellhub_agent
 
 function get_shellhub_based_on_user_input() {
    while true; do

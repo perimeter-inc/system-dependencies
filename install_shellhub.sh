@@ -11,10 +11,10 @@ export SHELLHUB_PATH=/usr/bin/shellhub_agent
 function get_shellhub_based_on_user_input() {
    echo -e "Do you want to build shellhub from sources (y/n)?.\nIf \"n\" is answered, a pre-built version will be downloaded (might not be the lattest version)."
    read -n1 -p "[y,n]" yn
-   case $yn in  
-      y|Y) build_shellhub_from_sources ;; 
-      n|N) download_prebuilt_shellhub ;; 
-      *) echo "Please answer y/n (yes/no)." ;; 
+   case $yn in
+      y|Y) build_shellhub_from_sources ;;
+      n|N) download_prebuilt_shellhub ;;
+      *) echo "Please answer y/n (yes/no)." ;;
    esac
 }
 
@@ -36,8 +36,19 @@ function build_shellhub_from_sources() {
 
 function install_go_compiler() {
    echo "Installing Go compiler..."
+   if (( $(uname -m) == "aarch64" )); then
+      wget https://golang.org/dl/go1.16.2.linux-arm64.tar.gz
+      export GO_COMPILER_FILE=go1.16.2.linux-arm64.tar.gz
+   elif (( $(uname -m) == "armv7l" )); then
+      wget https://golang.org/dl/go1.16.1.linux-armv6l.tar.gz
+      export GO_COMPILER_FILE=go1.16.1.linux-armv6l.tar.gz
+   else
+      echo "Architecture not supported: $(uname -m)"
+      exit -1
+   fi
+
    wget https://golang.org/dl/go1.16.1.linux-armv6l.tar.gz
-   rm -rf /usr/local/go && tar -C /usr/local -xzf go1.16.1.linux-armv6l.tar.gz
+   rm -rf /usr/local/go && tar -C /usr/local -xzf ${GO_COMPILER_FILE}
    export PATH=$PATH:/usr/local/go/bin
 }
 

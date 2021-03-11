@@ -1,7 +1,12 @@
 #!/bin/bash
 set -e
 
-SHELLHUB_PATH=/usr/bin/shellhub_agent
+if [ "$EUID" -ne 0 ]
+  then echo "Please run with sudo"
+  exit
+fi
+
+export SHELLHUB_PATH=/usr/bin/shellhub_agent
 
 function get_shellhub_based_on_user_input() {
    while true; do

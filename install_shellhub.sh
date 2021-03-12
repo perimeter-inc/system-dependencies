@@ -8,6 +8,9 @@ fi
 
 export SHELLHUB_EXECUTABLE_PATH=/usr/bin/shellhub_agent
 export SHELLHUB_KEYS_FOLDER=/root/keys
+export SHELLHUB_TENANT_ID=65e34c46-869b-459b-9833-660b8c39522c
+export SHELLHUB_SERVER_ADDRESS=http://ec2-3-142-187-112.us-east-2.compute.amazonaws.com
+
 
 function get_shellhub_based_on_user_input() {
    echo -e "Do you want to build shellhub from sources (y/n)?.\nIf \"n\" is answered, a pre-built version will be downloaded (might not be the lattest version)."
@@ -68,8 +71,8 @@ function install_shellhub_service() {
 Description=Shellhub Agent
 
 [Service]
-Environment = SHELLHUB_SERVER_ADDRESS=http://ec2-3-142-187-112.us-east-2.compute.amazonaws.com
-Environment = SHELLHUB_TENANT_ID=a61f31b9-936c-4b18-8b1f-d76d8b1cd144
+Environment = SHELLHUB_SERVER_ADDRESS=${SHELLHUB_SERVER_ADDRESS}
+Environment = SHELLHUB_TENANT_ID=${SHELLHUB_TENANT_ID}
 Environment = SHELLHUB_PRIVATE_KEY=${SHELLHUB_KEYS_FOLDER}/ssh_private_key
 
 Restart=always

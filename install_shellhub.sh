@@ -17,7 +17,7 @@ function get_shellhub_based_on_user_input() {
    case $yn in
       y|Y) build_shellhub_from_sources ;;
       n|N) download_prebuilt_shellhub ;;
-      *) echo "Please answer y/n (yes/no)." ;;
+      *) echo "Please answer y/n (yes/no)." || exit 1;;
    esac
 }
 

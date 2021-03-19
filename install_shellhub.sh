@@ -14,8 +14,7 @@ export PREFERRED_HOSTNAME="$(hostname)"
 
 function show_help {
     echo "Install shellhub."
-    echo "    USAGE"
-    echo "        $0 SERVER_ADDRESS TENANT_ID"
+    echo "    USAGE: $0 SERVER_ADDRESS TENANT_ID"
 }
 
 function parse_command_line {
@@ -109,7 +108,7 @@ function start_shellhub_service() {
    sudo systemctl restart shellhub_agent
 }
 
-parse_command_line
+parse_command_line $@
 get_shellhub_based_on_user_input
 install_shellhub_service
 create_key_pair

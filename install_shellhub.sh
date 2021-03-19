@@ -8,9 +8,24 @@ fi
 
 export SHELLHUB_EXECUTABLE_PATH=/usr/bin/shellhub_agent
 export SHELLHUB_KEYS_FOLDER=/root/keys
-export SHELLHUB_TENANT_ID=65e34c46-869b-459b-9833-660b8c39522c
-export SHELLHUB_SERVER_ADDRESS=http://ec2-13-56-77-247.us-west-1.compute.amazonaws.com/
+# export SHELLHUB_TENANT_ID=65e34c46-869b-459b-9833-660b8c39522c
+# export SHELLHUB_SERVER_ADDRESS=http://ec2-13-56-77-247.us-west-1.compute.amazonaws.com/
 export PREFERRED_HOSTNAME="$(hostname)"
+
+function show_help {
+    echo "Install shellhub."
+    echo "    USAGE"
+    echo "        $0 SERVER_ADDRESS TENANT_ID"
+}
+
+function parse_command_line {
+    if [ $# -lt 2 ]; then
+        show_help
+        exit 1
+    fi
+    export SHELLHUB_SERVER_ADDRESS="$1"
+    export SHELLHUB_TENANT_ID="$2"
+}
 
 function get_shellhub_based_on_user_input() {
    echo -e "Do you want to build shellhub from sources (y/n)?.\nIf \"n\" is answered, a pre-built version will be downloaded (might not be the lattest version)."
@@ -94,6 +109,7 @@ function start_shellhub_service() {
    sudo systemctl restart shellhub_agent
 }
 
+parse_command_line
 get_shellhub_based_on_user_input
 install_shellhub_service
 create_key_pair

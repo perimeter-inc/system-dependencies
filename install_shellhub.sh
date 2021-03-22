@@ -109,5 +109,4 @@ function start_shellhub_service() {
 parse_command_line $@
 get_shellhub_based_on_user_input
 install_shellhub_service
-create_key_pair
 start_shellhub_service

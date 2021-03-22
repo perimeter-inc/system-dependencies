@@ -8,8 +8,6 @@ fi
 
 export SHELLHUB_EXECUTABLE_PATH=/usr/bin/shellhub_agent
 export SHELLHUB_KEYS_FOLDER=/root/keys
-# export SHELLHUB_TENANT_ID=65e34c46-869b-459b-9833-660b8c39522c
-# export SHELLHUB_SERVER_ADDRESS=http://ec2-13-56-77-247.us-west-1.compute.amazonaws.com/
 export PREFERRED_HOSTNAME="$(hostname)"
 
 function show_help {
@@ -44,10 +42,11 @@ function download_prebuilt_shellhub() {
 
 function build_shellhub_from_sources() {
    install_go_compiler
-   git clone -b v0.5.1 https://github.com/shellhub-io/shellhub.git shellhub
+   cd ~
+   rm -rf shellhub && git clone -b v0.6.0 https://github.com/shellhub-io/shellhub.git shellhub
    cd shellhub/agent
    echo "Building shellhub..."
-   go build -ldflags "-X main.AgentVersion=v0.5.1"
+   go build -ldflags "-X main.AgentVersion=v0.6.0"
 
    cp -f ./agent "${SHELLHUB_EXECUTABLE_PATH}"
 }
@@ -64,21 +63,20 @@ function install_go_compiler() {
       exit -1
    fi
 
-   wget "https://golang.org/dl/${GO_COMPILER_FILE}"
+   rm "${GO_COMPILER_FILE}" && wget "https://golang.org/dl/${GO_COMPILER_FILE}"
    rm -rf /usr/local/go && tar -C /usr/local -xzf "${GO_COMPILER_FILE}"
    export PATH=$PATH:/usr/local/go/bin
 }
 
-function create_key_pair() {
-   sh <(curl "https://raw.githubusercontent.com/shellhub-io/shellhub/v0.5.1/bin/keygen")
+function install_shellhub_service() {
+   cd ~/shellhub
+   make keygen
    # By now, three files should have been created ssh_private_key, api_public_key and api_private_key.
    mkdir -p "${SHELLHUB_KEYS_FOLDER}"
    sudo cp -f ssh_private_key "${SHELLHUB_KEYS_FOLDER}"
    sudo cp -f api_public_key "${SHELLHUB_KEYS_FOLDER}"
    sudo cp -f api_private_key "${SHELLHUB_KEYS_FOLDER}"
-}
 
-function install_shellhub_service() {
    echo "Installing shellhub service."
    cat << EOF > /etc/systemd/system/shellhub_agent.service
 [Unit]

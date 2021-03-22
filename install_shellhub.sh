@@ -55,17 +55,18 @@ function install_go_compiler() {
    echo "Installing Go compiler..."
    ARCH="$(uname -m)"
    if [ "$ARCH" == "aarch64" ]; then
-      export GO_COMPILER_FILE=go1.16.2.linux-arm64.tar.gz
+      export GO_COMPILER_FILE=go1.14.15.linux-arm64.tar.gz
    elif [ "$ARCH" == "armv7l" ]; then
-      export GO_COMPILER_FILE=go1.16.1.linux-armv6l.tar.gz
+      export GO_COMPILER_FILE=go1.14.15.linux-armv6l.tar.gz
    else
       echo "Architecture not supported: $(uname -m)"
       exit -1
    fi
 
-   rm "${GO_COMPILER_FILE}" && wget "https://golang.org/dl/${GO_COMPILER_FILE}"
-   rm -rf /usr/local/go && tar -C /usr/local -xzf "${GO_COMPILER_FILE}"
-   export PATH=$PATH:/usr/local/go/bin
+   rm -rf "${GO_COMPILER_FILE}" && wget "https://golang.org/dl/${GO_COMPILER_FILE}"
+   rm -rf ~/go/
+   tar -C ~ -xzf "${GO_COMPILER_FILE}"
+   export PATH=$PATH:~/go/bin
 }
 
 function install_shellhub_service() {

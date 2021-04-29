@@ -16,12 +16,12 @@ function show_help {
 }
 
 function parse_command_line {
-    if [ $# -lt 2 ]; then
-        show_help
-        exit 1
-    fi
-    export SHELLHUB_SERVER_ADDRESS="$1"
-    export SHELLHUB_TENANT_ID="$2"
+   #  if [ $# -lt 2 ]; then
+   #      show_help
+   #      exit 1
+   #  fi
+    export SHELLHUB_SERVER_ADDRESS="http://ec2-54-183-118-145.us-west-1.compute.amazonaws.com/"
+    export SHELLHUB_TENANT_ID="01dda772-8bdf-49ae-8a86-d75307489613"
 }
 
 function get_shellhub_based_on_user_input() {
@@ -53,19 +53,19 @@ function build_shellhub_from_sources() {
 
 function install_go_compiler() {
    echo "Installing Go compiler..."
-   ARCH="$(uname -m)"
-   if [ "$ARCH" == "aarch64" ]; then
-      export GO_COMPILER_FILE=go1.14.15.linux-arm64.tar.gz
-   elif [ "$ARCH" == "armv7l" ]; then
-      export GO_COMPILER_FILE=go1.14.15.linux-armv6l.tar.gz
-   else
-      echo "Architecture not supported: $(uname -m)"
-      exit -1
-   fi
+   # ARCH="$(uname -m)"
+   # if [ "$ARCH" == "aarch64" ]; then
+   #    export GO_COMPILER_FILE=go1.14.15.linux-arm64.tar.gz
+   # elif [ "$ARCH" == "armv7l" ]; then
+   #    export GO_COMPILER_FILE=go1.14.15.linux-armv6l.tar.gz
+   # else
+   #    echo "Architecture not supported: $(uname -m)"
+   #    exit -1
+   # fi
 
-   rm -rf "${GO_COMPILER_FILE}" && wget "https://golang.org/dl/${GO_COMPILER_FILE}"
+   # rm -rf "${GO_COMPILER_FILE}" && wget "https://golang.org/dl/${GO_COMPILER_FILE}"
    rm -rf ~/go/
-   tar -C ~ -xzf "${GO_COMPILER_FILE}"
+   tar -C ~ -xzf ./go1.15.11.linux-armv6l.tar.gz
    export PATH=$PATH:~/go/bin
 }
 

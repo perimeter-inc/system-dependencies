@@ -105,6 +105,7 @@ function start_shellhub_service() {
    sudo systemctl daemon-reload
    sudo systemctl enable shellhub_agent
    sudo systemctl restart shellhub_agent
+   chmod +x "${SHELLHUB_EXECUTABLE_PATH}"
 }
 
 parse_command_line $@

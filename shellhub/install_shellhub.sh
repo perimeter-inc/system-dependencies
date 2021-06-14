@@ -113,9 +113,9 @@ EOF
 function start_shellhub_service() {
    echo "Setting up shellhub service."
    chmod +x "${SHELLHUB_EXECUTABLE_PATH}"
-   sudo systemctl daemon-reload
-   sudo systemctl enable shellhub_agent
-   sudo systemctl restart shellhub_agent
+   systemctl daemon-reload
+   systemctl enable shellhub_agent
+   systemctl restart shellhub_agent
 }
 
 parse_command_line $@

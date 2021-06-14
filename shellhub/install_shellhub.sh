@@ -31,18 +31,26 @@ function get_shellhub_based_on_user_input() {
    echo -e "Do you want to build shellhub from sources (y/N)?.\nIf \"n\" is answered (or after 10 sec), a pre-built version will be used (might not be the lattest version)."
    read -t 30 -n1 -p "[y,N]" yn
    case $yn in
-      y|Y) build_shellhub_from_sources ;;
-      *) download_prebuilt_shellhub ;;
+      y|Y) install_shellhub_from_sources ;;
+      *) install_prebuilt_shellhub ;;
    esac
 }
 
-function download_prebuilt_shellhub() {
-   echo "Not implemented!!!"
-   echo "TODO: Infer and download based on the architecture."
-   exit 1
+function install_prebuilt_shellhub() {
+   ARCH="$(uname -m)"
+   if [ "$ARCH" == "aarch64" ]; then
+      export SHELLHUB_FILE=shellhub_agent_aarch64
+   elif [ "$ARCH" == "armv7l" ]; then
+      export SHELLHUB_FILE=shellhub_agent_armv7
+   else
+      echo "Architecture not supported: $(uname -m)"
+      exit -1
+   fi
+
+   cp -f "./${SHELLHUB_FILE}" "${SHELLHUB_EXECUTABLE_PATH}"
 }
 
-function build_shellhub_from_sources() {
+function install_shellhub_from_sources() {
    install_go_compiler
    cd ~/shellhub/agent
    echo "Building shellhub..."

@@ -83,9 +83,9 @@ function install_shellhub_service() {
    make keygen
    # By now, three files should have been created ssh_private_key, api_public_key and api_private_key.
    mkdir -p "${SHELLHUB_KEYS_FOLDER}"
-   sudo cp -f ssh_private_key "${SHELLHUB_KEYS_FOLDER}"
-   sudo cp -f api_public_key "${SHELLHUB_KEYS_FOLDER}"
-   sudo cp -f api_private_key "${SHELLHUB_KEYS_FOLDER}"
+   cp -f ssh_private_key "${SHELLHUB_KEYS_FOLDER}"
+   cp -f api_public_key "${SHELLHUB_KEYS_FOLDER}"
+   cp -f api_private_key "${SHELLHUB_KEYS_FOLDER}"
 
    echo "Installing shellhub service."
    cat << EOF > /etc/systemd/system/shellhub_agent.service

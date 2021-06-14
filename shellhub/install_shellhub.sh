@@ -7,7 +7,7 @@ if [ "$EUID" -ne 0 ]
 fi
 
 export SHELLHUB_EXECUTABLE_PATH=/usr/bin/shellhub_agent
-export SHELLHUB_KEYS_FOLDER=/root/keys
+export SHELLHUB_KEYS_FOLDER=/root/shellhub_keys
 export PREFERRED_HOSTNAME="$(hostname)"
 
 function show_help {
@@ -25,12 +25,14 @@ function parse_command_line {
 }
 
 function get_shellhub_based_on_user_input() {
-   echo -e "Do you want to build shellhub from sources (y/n)?.\nIf \"n\" is answered, a pre-built version will be downloaded (might not be the lattest version)."
-   read -n1 -p "[y,n]" yn
+   cd ~
+   rm -rf shellhub && git clone -b v0.6.0 https://github.com/shellhub-io/shellhub.git shellhub
+
+   echo -e "Do you want to build shellhub from sources (y/N)?.\nIf \"n\" is answered (or after 10 sec), a pre-built version will be used (might not be the lattest version)."
+   read -t 30 -n1 -p "[y,N]" yn
    case $yn in
       y|Y) build_shellhub_from_sources ;;
-      n|N) download_prebuilt_shellhub ;;
-      *) echo "Please answer y/n (yes/no)." || exit 1;;
+      *) download_prebuilt_shellhub ;;
    esac
 }
 
@@ -42,9 +44,7 @@ function download_prebuilt_shellhub() {
 
 function build_shellhub_from_sources() {
    install_go_compiler
-   cd ~
-   rm -rf shellhub && git clone -b v0.6.0 https://github.com/shellhub-io/shellhub.git shellhub
-   cd shellhub/agent
+   cd ~/shellhub/agent
    echo "Building shellhub..."
    go build -ldflags "-X main.AgentVersion=v0.6.0"
 
@@ -102,10 +102,10 @@ EOF
 
 function start_shellhub_service() {
    echo "Setting up shellhub service."
+   chmod +x "${SHELLHUB_EXECUTABLE_PATH}"
    sudo systemctl daemon-reload
    sudo systemctl enable shellhub_agent
    sudo systemctl restart shellhub_agent
-   chmod +x "${SHELLHUB_EXECUTABLE_PATH}"
 }
 
 parse_command_line $@

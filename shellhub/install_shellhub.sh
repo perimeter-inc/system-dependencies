@@ -87,6 +87,7 @@ function install_shellhub_service() {
    cp -f api_public_key "${SHELLHUB_KEYS_FOLDER}"
    cp -f api_private_key "${SHELLHUB_KEYS_FOLDER}"
 
+   chmod +x "${SHELLHUB_EXECUTABLE_PATH}"
    echo "Installing shellhub service."
    cat << EOF > /etc/systemd/system/shellhub_agent.service
 [Unit]

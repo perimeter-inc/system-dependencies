@@ -27,8 +27,8 @@ function parse_command_line {
 function get_shellhub_based_on_user_input() {
    rm -rf ~/shellhub && git clone -b v0.6.0 https://github.com/shellhub-io/shellhub.git ~/shellhub
 
-   echo -e "Do you want to build shellhub from sources (y/N)?.\nIf \"n\" is answered (or after 10 sec), a pre-built version will be used (might not be the lattest version)."
-   read -t 30 -n1 -p "[y,N]" yn
+   echo -e "Do you want to build shellhub from sources (y/N)?.\nIf \"n\" is answered, a pre-built version will be used (might not be the lattest version)."
+   read  -n1 -p "[y,N]" yn
    case $yn in
       y|Y) install_shellhub_from_sources ;;
       *) install_prebuilt_shellhub ;;

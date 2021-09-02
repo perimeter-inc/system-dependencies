@@ -37,10 +37,12 @@ function get_shellhub_based_on_user_input() {
 
 function install_prebuilt_shellhub() {
    ARCH="$(uname -m)"
+   MY_PATH="`dirname \"$0\"`"
+
    if [ "$ARCH" == "aarch64" ]; then
-      export SHELLHUB_FILE=shellhub_agent_aarch64
+      export SHELLHUB_FILE=${MY_PATH}/shellhub_agent_aarch64
    elif [ "$ARCH" == "armv7l" ]; then
-      export SHELLHUB_FILE=shellhub_agent_armv7
+      export SHELLHUB_FILE=${MY_PATH}/shellhub_agent_armv7
    else
       echo "Architecture not supported: $(uname -m)"
       exit -1

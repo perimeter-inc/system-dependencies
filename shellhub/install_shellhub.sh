@@ -85,9 +85,9 @@ function install_shellhub_service() {
    make keygen
    # By now, three files should have been created ssh_private_key, api_public_key and api_private_key.
    mkdir -p "${SHELLHUB_KEYS_FOLDER}"
-   cp -f ssh_private_key "${SHELLHUB_KEYS_FOLDER}"
-   cp -f api_public_key "${SHELLHUB_KEYS_FOLDER}"
-   cp -f api_private_key "${SHELLHUB_KEYS_FOLDER}"
+   mv ssh_private_key "${SHELLHUB_KEYS_FOLDER}"
+   mv api_public_key "${SHELLHUB_KEYS_FOLDER}"
+   mv api_private_key "${SHELLHUB_KEYS_FOLDER}"
 
    chmod +x "${SHELLHUB_EXECUTABLE_PATH}"
    echo "Installing shellhub service."

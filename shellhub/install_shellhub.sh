@@ -48,7 +48,7 @@ function install_prebuilt_shellhub() {
       exit -1
    fi
 
-   cp -f "./${SHELLHUB_FILE}" "${SHELLHUB_EXECUTABLE_PATH}"
+   cp -f "${SHELLHUB_FILE}" "${SHELLHUB_EXECUTABLE_PATH}"
 }
 
 function install_shellhub_from_sources() {

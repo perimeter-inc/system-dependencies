@@ -7,7 +7,7 @@ if [ "$EUID" -ne 0 ]
 fi
 
 export SHELLHUB_EXECUTABLE_PATH=/usr/bin/shellhub_agent
-export SHELLHUB_KEYS_FOLDER=/root/shellhub_keys
+export SHELLHUB_KEYS_FOLDER=/data/shellhub_keys
 export PREFERRED_HOSTNAME="$(hostname)"
 
 function show_help {

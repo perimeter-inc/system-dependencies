@@ -113,7 +113,6 @@ EOF
 
 echo "Installing shellhub configuration file."
    cat << EOF > "${SHELLHUB_CONF_FILE}"
-
 Environment = SHELLHUB_SERVER_ADDRESS="${SHELLHUB_SERVER_ADDRESS}"
 Environment = SHELLHUB_TENANT_ID="${SHELLHUB_TENANT_ID}"
 Environment = SHELLHUB_PRIVATE_KEY="${SHELLHUB_KEYS_FOLDER}/ssh_private_key"

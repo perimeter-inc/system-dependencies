@@ -7,8 +7,8 @@ if [ "$EUID" -ne 0 ]
 fi
 
 export SHELLHUB_EXECUTABLE_PATH=/usr/bin/shellhub_agent
-export SHELLHUB_KEYS_FOLDER=/data/shellhub_keys
-export SHELLHUB_SERVICE_FOLDER=/data/systemd
+export SHELLHUB_FOLDER=/data/shellhub
+export SHELLHUB_KEYS_FOLDER=${SHELLHUB_FOLDER}/shellhub_keys
 export PREFERRED_HOSTNAME="$(hostname)"
 
 function show_help {
@@ -90,10 +90,10 @@ function install_shellhub_service() {
    mv api_public_key "${SHELLHUB_KEYS_FOLDER}"
    mv api_private_key "${SHELLHUB_KEYS_FOLDER}"
 
+   mkdir -p "${SHELLHUB_FOLDER}"
    chmod +x "${SHELLHUB_EXECUTABLE_PATH}"
-   mkdir -p "${SHELLHUB_SERVICE_FOLDER}"
+   cat << EOF > "${SHELLHUB_FOLDER}"/shellhub_agent.service
    echo "Installing shellhub service."
-   cat << EOF > "${SHELLHUB_SERVICE_FOLDER}"/shellhub_agent.service
 [Unit]
 Description=Shellhub Agent
 
@@ -111,8 +111,8 @@ SyslogIdentifier = shellhub_agent
 [Install]
 WantedBy=multi-user.target
 
+   ln -s ${SHELLHUB_FOLDER}/shellhub_agent.service /etc/systemd/system/
 EOF
-   ln -s ${SHELLHUB_SERVICE_FOLDER}/shellhub_agent.service /etc/systemd/system/
    cd -
 }
 

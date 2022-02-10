@@ -97,6 +97,7 @@ function install_shellhub_service() {
    cat << EOF > /etc/systemd/system/shellhub_agent.service
 [Unit]
 Description=Shellhub Agent
+RequiresMountsFor=/data
 
 [Service]
 EnvironmentFile=${SHELLHUB_CONF_FILE}

@@ -8,7 +8,7 @@ fi
 
 export SHELLHUB_EXECUTABLE_PATH=/usr/bin/shellhub_agent
 export SHELLHUB_KEYS_FOLDER=/data/shellhub_keys
-export SHELLHUB_SERVICE_FOLDER=/data/systemd/
+export SHELLHUB_SERVICE_FOLDER=/data/systemd
 export PREFERRED_HOSTNAME="$(hostname)"
 
 function show_help {

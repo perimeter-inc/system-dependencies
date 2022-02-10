@@ -9,6 +9,7 @@ fi
 export SHELLHUB_EXECUTABLE_PATH=/usr/bin/shellhub_agent
 export SHELLHUB_FOLDER=/data/shellhub
 export SHELLHUB_KEYS_FOLDER=${SHELLHUB_FOLDER}/shellhub_keys
+export SHELLHUB_CONF_FILE==${SHELLHUB_FOLDER}/shellhub.conf
 export PREFERRED_HOSTNAME="$(hostname)"
 
 function show_help {
@@ -92,16 +93,13 @@ function install_shellhub_service() {
 
    mkdir -p "${SHELLHUB_FOLDER}"
    chmod +x "${SHELLHUB_EXECUTABLE_PATH}"
-   cat << EOF > "${SHELLHUB_FOLDER}"/shellhub_agent.service
    echo "Installing shellhub service."
+   cat << EOF > /etc/systemd/system/shellhub_agent.service
 [Unit]
 Description=Shellhub Agent
 
 [Service]
-Environment = SHELLHUB_SERVER_ADDRESS="${SHELLHUB_SERVER_ADDRESS}"
-Environment = SHELLHUB_TENANT_ID="${SHELLHUB_TENANT_ID}"
-Environment = SHELLHUB_PRIVATE_KEY="${SHELLHUB_KEYS_FOLDER}/ssh_private_key"
-Environment = PREFERRED_HOSTNAME="${PREFERRED_HOSTNAME}"
+EnvironmentFile="${SHELLHUB_CONF_FILE}"
 
 Restart=always
 RestartSec=5
@@ -112,7 +110,18 @@ SyslogIdentifier = shellhub_agent
 WantedBy=multi-user.target
 
 EOF
-   ln -s ${SHELLHUB_FOLDER}/shellhub_agent.service /etc/systemd/system/
+
+echo "Installing shellhub configuration file."
+   cat << EOF > "${SHELLHUB_CONF_FILE}"
+
+Environment = SHELLHUB_SERVER_ADDRESS="${SHELLHUB_SERVER_ADDRESS}"
+Environment = SHELLHUB_TENANT_ID="${SHELLHUB_TENANT_ID}"
+Environment = SHELLHUB_PRIVATE_KEY="${SHELLHUB_KEYS_FOLDER}/ssh_private_key"
+Environment = PREFERRED_HOSTNAME="${PREFERRED_HOSTNAME}"
+
+
+EOF
+
    cd -
 }
 

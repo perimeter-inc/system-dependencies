@@ -99,7 +99,7 @@ function install_shellhub_service() {
 Description=Shellhub Agent
 
 [Service]
-EnvironmentFile="${SHELLHUB_CONF_FILE}"
+EnvironmentFile=${SHELLHUB_CONF_FILE}
 
 Restart=always
 RestartSec=5

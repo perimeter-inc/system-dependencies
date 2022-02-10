@@ -111,8 +111,8 @@ SyslogIdentifier = shellhub_agent
 [Install]
 WantedBy=multi-user.target
 
-   ln -s ${SHELLHUB_FOLDER}/shellhub_agent.service /etc/systemd/system/
 EOF
+   ln -s ${SHELLHUB_FOLDER}/shellhub_agent.service /etc/systemd/system/
    cd -
 }
 

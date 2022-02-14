@@ -10,11 +10,7 @@ fi
 
 function get_mender()
 {
-   install_libs_mender
-   install_mender_client
-
    [ ! -d ${HOME}/mender ] && git clone -b v2.0.1 https://github.com/mendersoftware/mender-connect.git ~/mender
-   install_mender_connect_from_sources
 }
 
 function install_libs_mender()
@@ -27,6 +23,13 @@ function install_mender_client()
    apt install mender-client_3.1.0-1_arm64.deb
 }
 
+function install_mender()
+{
+   install_libs_mender
+   install_mender_client
+
+   #install_mender_connect_from_sources
+} 
 
 
 function install_mender_connect_from_sources()
@@ -65,5 +68,4 @@ function start_shellhub_service()
 }
 
 get_mender
-install_shellhub_service
-start_shellhub_service
+install_mender

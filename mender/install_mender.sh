@@ -39,6 +39,7 @@ function install_mender_connect_from_sources()
 
    echo "Building mender connect..."
    make build
+   make install
 }
 
 function install_go_compiler()
@@ -68,5 +69,5 @@ function start_shellhub_service()
    systemctl restart mender-connect
 }
 
-#get_mender
+get_mender
 install_mender

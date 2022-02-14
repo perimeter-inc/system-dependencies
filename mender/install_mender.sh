@@ -15,12 +15,12 @@ function get_mender()
 
 function install_libs_mender()
 {
-   apt install libffi6_3.2.1-9_arm64.deb
+   apt install ./libffi6_3.2.1-9_arm64.deb
 }
 
 function install_mender_client()
 {
-   apt install mender-client_3.1.0-1_arm64.deb
+   apt install ./mender-client_3.1.0-1_arm64.deb
 }
 
 function install_mender()
@@ -67,5 +67,5 @@ function start_shellhub_service()
    systemctl restart mender-connect
 }
 
-get_mender
+#get_mender
 install_mender

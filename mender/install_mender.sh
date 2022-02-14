@@ -10,7 +10,7 @@ fi
 
 function get_mender()
 {
-   [ ! -d ${HOME}/mender ] && git clone -b v2.0.1 https://github.com/mendersoftware/mender-connect.git ~/mender
+   [ ! -d ${HOME}/mender-connect ] && git clone -b 2.0.1 https://github.com/mendersoftware/mender-connect.git ./mender-connect
 }
 
 function install_libs_mender()
@@ -29,15 +29,17 @@ function install_mender()
    install_libs_mender
    install_mender_client
 
-   #install_mender_connect_from_sources
+   install_mender_connect_from_sources
 } 
 
 
 function install_mender_connect_from_sources()
 {
    install_go_compiler
+   apt-get install libglib2.0-dev
 
    echo "Building mender connect..."
+   cd ./mender-connect
    make build
    make install
 }

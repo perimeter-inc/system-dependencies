@@ -36,7 +36,7 @@ function install_mender()
 function install_mender_connect_from_sources()
 {
    install_go_compiler
-   apt-get install libglib2.0-dev
+#   apt-get install libglib2.0-dev
 
    echo "Building mender connect..."
    cd ./mender-connect
@@ -65,7 +65,7 @@ function install_go_compiler()
 
 
 
-function start_shellhub_service()
+function start_mender_service()
 {
    systemctl enable mender-connect
    systemctl restart mender-connect
@@ -73,3 +73,4 @@ function start_shellhub_service()
 
 get_mender
 install_mender
+start_mender_service

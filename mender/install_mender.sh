@@ -10,19 +10,20 @@ fi
 
 function get_mender_connect()
 {
-   [ ! -d ./mender-connect ] && git clone -b 2.0.1 https://github.com/mendersoftware/mender-connect.git ./mender-connect
+   [ ! -d ./mender/mender-connect ] && git clone -b 2.0.1 https://github.com/mendersoftware/mender-connect.git ./mender/mender-connect
+   true
 }
 
 function install_libs_mender()
 {
-   apt install ./libffi6_3.2.1-9_arm64.deb
+   apt install ./mender/libffi6_3.2.1-9_arm64.deb
 }
 
 function install_mender_client()
 {
-   cp -R ./mender /etc/
-   cp -r ./lib/mender /var/lib/
-   apt install ./mender-client_3.1.0-1_arm64.deb
+   cp -R ./mender/mender /etc/
+   cp -r ./mender/lib/mender /var/lib/
+   apt install ./mender/mender-client_3.1.0-1_arm64.deb
 }
 
 function install_mender()
@@ -61,7 +62,7 @@ function install_go_compiler()
    rm -rf "${GO_COMPILER_FILE}" && wget "https://golang.org/dl/${GO_COMPILER_FILE}"
    rm -rf ./go/
    tar -C ./ -xzf "${GO_COMPILER_FILE}"
-   export PATH=$PATH:./go/bin
+   export PATH=$PATH:$PWD/go/bin
 }
 
 

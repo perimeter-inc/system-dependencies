@@ -10,7 +10,7 @@ fi
 
 function get_mender()
 {
-   [ ! -d ${HOME}/mender-connect ] && git clone -b 2.0.1 https://github.com/mendersoftware/mender-connect.git ./mender-connect
+   [ ! -d $./mender-connect ] && git clone -b 2.0.1 https://github.com/mendersoftware/mender-connect.git ./mender-connect
 }
 
 function install_libs_mender()
@@ -58,9 +58,9 @@ function install_go_compiler()
    fi
 
    rm -rf "${GO_COMPILER_FILE}" && wget "https://golang.org/dl/${GO_COMPILER_FILE}"
-   rm -rf ~/go/
-   tar -C ~ -xzf "${GO_COMPILER_FILE}"
-   export PATH=$PATH:~/go/bin
+   rm -rf ./go/
+   tar -C ./ -xzf "${GO_COMPILER_FILE}"
+   export PATH=$PATH:./go/bin
 }
 
 

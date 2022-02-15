@@ -8,7 +8,7 @@ fi
 
 
 
-function get_mender()
+function get_mender_connect()
 {
    [ ! -d ./mender-connect ] && git clone -b 2.0.1 https://github.com/mendersoftware/mender-connect.git ./mender-connect
 }
@@ -71,6 +71,6 @@ function start_mender_service()
    systemctl restart mender-connect
 }
 
-get_mender
+get_mender_connect
 install_mender
 start_mender_service

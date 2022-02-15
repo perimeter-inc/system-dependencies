@@ -21,6 +21,7 @@ function install_libs_mender()
 function install_mender_client()
 {
    cp -R ./mender /etc/
+   cp -r ./lib/mender /var/lib/
    apt install ./mender-client_3.1.0-1_arm64.deb
 }
 

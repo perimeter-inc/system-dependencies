@@ -10,7 +10,7 @@ fi
 
 function get_mender()
 {
-   [ ! -d $./mender-connect ] && git clone -b 2.0.1 https://github.com/mendersoftware/mender-connect.git ./mender-connect
+   [ ! -d ./mender-connect ] && git clone -b 2.0.1 https://github.com/mendersoftware/mender-connect.git ./mender-connect
 }
 
 function install_libs_mender()

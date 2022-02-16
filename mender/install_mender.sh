@@ -37,6 +37,7 @@ function install_mender()
 
 function install_mender_connect_from_sources()
 {
+   echo "Installing mender-connect
    install_go_compiler
 #   apt-get install libglib2.0-dev
 

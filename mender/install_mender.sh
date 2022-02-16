@@ -70,6 +70,7 @@ function install_go_compiler()
 
 function start_mender_service()
 {
+   echo "Starting mender connect service"
    systemctl enable mender-connect
    systemctl restart mender-connect
 }

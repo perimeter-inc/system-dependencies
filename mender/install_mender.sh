@@ -23,7 +23,7 @@ function install_mender_client_from_package()
 {
    echo "Installing mender client."
    cp -R ./mender/mender /etc/
-   cp -r ./mender/lib/mender /var/lib/
+   cp -r ${SCRIPT_PATH}/lib/mender /var/lib/
    apt install ${SCRIPT_PATH}/mender-client_3.1.0-1_arm64.deb
 }
 

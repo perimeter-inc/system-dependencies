@@ -10,7 +10,7 @@ export SCRIPT_PATH=$(dirname $(readlink -f $0))
 
 function get_mender_connect()
 {
-   [ ! -d ./mender/mender-connect ] && git clone -b 2.0.1 https://github.com/mendersoftware/mender-connect.git ./mender/mender-connect
+   [ ! -d ${SCRIPT_PATH}/mender-connect ] && git clone -b 2.0.1 https://github.com/mendersoftware/mender-connect.git ${SCRIPT_PATH}/mender-connect
    true
 }
 

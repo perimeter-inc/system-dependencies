@@ -50,7 +50,7 @@ function install_mender_connect_from_sources()
 
 function install_go_compiler()
 {
-   echo "Installing Go compiler..."
+   echo "Installing Go compiler."
    ARCH="$(uname -m)"
    if [ "$ARCH" == "aarch64" ]; then
       export GO_COMPILER_FILE=go1.14.15.linux-arm64.tar.gz

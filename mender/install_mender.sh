@@ -32,7 +32,7 @@ function install_mender()
    install_mender_lib_from_package
    install_mender_client_from_package
    install_mender_connect_from_sources
-} 
+}
 
 
 function install_mender_connect_from_sources()

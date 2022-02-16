@@ -6,7 +6,7 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-
+export SCRIPT_PATH=$(dirname $(readlink -f $0))
 
 function get_mender_connect()
 {

@@ -42,7 +42,7 @@ function install_mender_connect_from_sources()
    install_go_compiler
 #   apt-get install libglib2.0-dev
 
-   echo "Building mender connect..."
+   echo "Building mender connect."
    cd ${SCRIPT_PATH}/mender-connect
    make build
    make install

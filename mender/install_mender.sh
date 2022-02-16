@@ -8,6 +8,28 @@ fi
 
 export SCRIPT_PATH=$(dirname $(readlink -f $0))
 
+function help {
+    echo "Install Mender Client."
+    echo "    USAGE"
+    echo "        $0 [ [-h | --help] | [[--device] DEVICE_TYPE ]]]"
+    echo "        ex: $0 --device variscite-1.0"
+}
+
+function parse_command_line {
+   if [ $# -eq 0 ]; then
+      echo "No arguments supplied."
+      help
+      exit
+   fi
+
+   if [ $1 != "--device" ]; then
+      help
+      exit
+   fi
+
+   export DEVICE_TYPE="$2"
+}
+
 function get_mender_connect()
 {
    [ ! -d ${SCRIPT_PATH}/mender-connect ] && git clone -b 2.0.1 https://github.com/mendersoftware/mender-connect.git ${SCRIPT_PATH}/mender-connect

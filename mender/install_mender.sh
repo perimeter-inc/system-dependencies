@@ -98,6 +98,7 @@ function start_mender_service()
    systemctl restart mender-connect
 }
 
+parse_command_line "$@"
 get_mender_connect
 install_mender
 start_mender_service

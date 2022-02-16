@@ -40,7 +40,7 @@ function install_mender_connect_from_sources()
 {
    echo "Installing mender-connect."
    install_go_compiler
-#   apt-get install libglib2.0-dev
+#   apt-get install libglib2.0-dev -y
 
    echo "Building mender connect."
    cd ${SCRIPT_PATH}/mender-connect

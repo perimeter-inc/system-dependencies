@@ -16,6 +16,7 @@ function get_mender_connect()
 
 function install_mender_lib_from_package()
 {
+   echo "Installing lib dependencies mender client and mender connect."
    apt install ${SCRIPT_PATH}/libffi6_3.2.1-9_arm64.deb
 }
 
@@ -37,7 +38,7 @@ function install_mender()
 
 function install_mender_connect_from_sources()
 {
-   echo "Installing mender-connect
+   echo "Installing mender-connect"
    install_go_compiler
 #   apt-get install libglib2.0-dev
 

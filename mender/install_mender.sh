@@ -42,7 +42,7 @@ function install_mender_connect_from_sources()
 #   apt-get install libglib2.0-dev
 
    echo "Building mender connect..."
-   cd ./mender/mender-connect
+   cd ${SCRIPT_PATH}/mender-connect
    make build
    make install
 }

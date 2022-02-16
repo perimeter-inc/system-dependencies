@@ -16,7 +16,7 @@ function get_mender_connect()
 
 function install_mender_lib_from_package()
 {
-   apt install ./mender/libffi6_3.2.1-9_arm64.deb
+   apt install ${SCRIPT_PATH}/libffi6_3.2.1-9_arm64.deb
 }
 
 function install_mender_client_from_package()

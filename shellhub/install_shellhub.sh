@@ -18,10 +18,6 @@ function show_help {
 }
 
 function parse_command_line {
-    if [ $# -lt 2 ]; then
-        show_help
-        exit 1
-    fi
     export SHELLHUB_SERVER_ADDRESS="$1"
     export SHELLHUB_TENANT_ID="$2"
 }
